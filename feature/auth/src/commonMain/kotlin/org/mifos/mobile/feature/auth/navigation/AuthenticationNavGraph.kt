@@ -23,13 +23,14 @@ import org.mifos.mobile.feature.auth.login.loginDestination
 import org.mifos.mobile.feature.auth.login.navigateToLoginScreen
 import org.mifos.mobile.feature.auth.otpAuthentication.navigateToOtpAuthScreen
 import org.mifos.mobile.feature.auth.otpAuthentication.otpAuthenticationDestination
+import org.mifos.mobile.feature.auth.privacyNotice.navigateToPrivacyNoticeScreen
+import org.mifos.mobile.feature.auth.privacyNotice.privacyNoticeDestination
 import org.mifos.mobile.feature.auth.recoverPassword.navigateToRecoverPasswordScreen
 import org.mifos.mobile.feature.auth.recoverPassword.recoverPasswordDestination
 import org.mifos.mobile.feature.auth.registration.navigateToRegisterScreen
 import org.mifos.mobile.feature.auth.registration.registrationDestination
 import org.mifos.mobile.feature.auth.setNewPassword.navigateToSetPasswordScreen
 import org.mifos.mobile.feature.auth.setNewPassword.setPasswordDestination
-import org.mifos.mobile.feature.auth.uploadId.navigateToUploadIdScreen
 import org.mifos.mobile.feature.auth.uploadId.uploadIdDestination
 
 @Serializable
@@ -56,9 +57,8 @@ fun NavGraphBuilder.authenticationNavGraph(
 
         registrationDestination(
             navigateToLoginScreen = navController::navigateToLoginScreen,
-//            navigateToUploadIdScreen = navController::navigateToUploadIdScreen,
 //            TODO Remove this and use above one after getting an api for upload id screen
-            navigateToUploadIdScreen = navController::navigateToOtpAuthScreen,
+            navigateToNextScreen = navController::navigateToPrivacyNoticeScreen,
         )
 
         uploadIdDestination(
@@ -80,6 +80,11 @@ fun NavGraphBuilder.authenticationNavGraph(
         setPasswordDestination(
             navigateToStatusScreen = navigateToStatusScreen,
             navigateToLoginScreen = navController::navigateToLoginScreen,
+        )
+
+        privacyNoticeDestination(
+            onAcceptClick = {},
+            onDeclineClick = navController::navigateToLoginScreen,
         )
     }
 }
